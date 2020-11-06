@@ -1,1 +1,2 @@
-# AdvAnimationSem1
+# 2021StudentAdvancedAnimation
+Advanced Animation Student Starter Code
