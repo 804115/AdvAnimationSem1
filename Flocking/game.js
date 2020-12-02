@@ -1,4 +1,5 @@
 function Game(){
+  this.vehicles = [];
     // get the canvas as a property of the game
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas
     this.canvas = document.getElementById('canvas');
@@ -10,7 +11,7 @@ function Game(){
     let updateSlider = function(e) {    // update event handler
         e.target.display.textContent = e.target.value;
     }
-    for(i = 1; i <= 6; i++){    // for six sliders
+    for(let i = 1; i <= 6; i++){    // for six sliders
         // use bracket notation to access slider properties of 'this'
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors
         let sliderId = "slider" + i;    // "slider1", "slider2", etc
@@ -22,9 +23,17 @@ function Game(){
         slider.addEventListener('input',updateSlider);  // update display value when it changes
     }
 
+    for(let i = 0; i < 20; i++){
+      this.vehicles.push(new Vehicle(Math.random()*this.canvas.width, Math.random()*this.canvas.height));
+    }
+
+
 } //++++++++++++++++++++++  end Game
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
-
+  console.log(this.vehicles[0].vel);
+  for(let i = 0; i < this.vehicles.length; i++){
+    this.vehicles[i].run();
+  }
 }

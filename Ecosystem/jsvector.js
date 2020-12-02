@@ -35,14 +35,12 @@ JSVector.prototype.getDirection = function(){
 JSVector.prototype.add = function(v2){
   this.x += v2.x;
   this.y += v2.y;
-  return this;
 }
 
 // Subtract another vector from this vector
 JSVector.prototype.sub = function(v2){
   this.x -= v2.x;
   this.y -= v2.y;
-  return this;
 }
 
 // Class method to return a new vector that is the sum of two vectors
@@ -59,20 +57,17 @@ JSVector.subGetNew = function(v1,v2){
 JSVector.prototype.multiply = function(scalar){
   this.x *= scalar;
   this.y *= scalar;
-  return this;
 }
 
 // Divide this vector by a scalar
 JSVector.prototype.divide = function(scalar){
   this.x /= scalar;
   this.y /= scalar;
-  return this;
 }
 
 // Normalize this vector so that it has a magnitude of 1
 JSVector.prototype.normalize = function(){
   this.setMagnitude(1);
-  return this;
 }
 
 // Limit the magnitude of this vector
