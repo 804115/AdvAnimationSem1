@@ -4,7 +4,7 @@ function Particle(x, y, dx, dy, rad, clr){
   this.acc = new JSVector(0, 0);
   this.rad = rad;
   this.clr = clr;
-  this.lifeSpan = 600;
+  this.lifeSpan = 100;
   this.isDead = false;
 
   Particle.prototype.run = function() {

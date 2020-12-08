@@ -72,10 +72,10 @@ JSVector.prototype.normalize = function(){
 
 // Limit the magnitude of this vector
 JSVector.prototype.limit = function(lim){
-  if(this.getMagnitude() > lim){
-    this.setMagnitude(lim);
-  }
+  this.normalize();
+  this.multiply(Math.min(this.getMagnitude(), lim));
   return this;
+  //return this.normalize().multiply(Math.min(this.magnitude(), lim));
 }
 
 // Get the distance between this vector and another one

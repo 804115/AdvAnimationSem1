@@ -1,4 +1,5 @@
 function Game(){
+  game = this;
   this.vehicles = [];
     // get the canvas as a property of the game
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas
@@ -32,8 +33,8 @@ function Game(){
 
 // function to run the game each animation cycle
 Game.prototype.run = function(){
-  console.log(this.vehicles[0].vel);
+  //console.log(this.vehicles[0].vel);
   for(let i = 0; i < this.vehicles.length; i++){
-    this.vehicles[i].run();
+    this.vehicles[i].run(this.vehicles);
   }
 }

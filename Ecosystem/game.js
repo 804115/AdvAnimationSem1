@@ -1,15 +1,35 @@
 function Game(){
-  this.canvas = document.getElementById('canvas');
-  this.ctx = this.canvas.getContext('2d');
-  this.ps = new ParticleSystem();
+    game = this;
+    let numVehicles = 20;
+    this.canvas = document.getElementById('canvas');
+    this.ctx = this.canvas.getContext('2d');
+    this.movers = [];
+    this.createMovers(this.canvas, 40);
+    this.ps = new ParticleSystem();
+    this.vehicles = [];
+
+    // fill vehicles
+    for(let i = 0; i < 20; i++){
+      this.vehicles.push(new Vehicle(Math.random()*this.canvas.width, Math.random()*this.canvas.height));
+    }
+
 }
 
+// function to run the game each animation cycle
 Game.prototype.run = function(){
-  this.ps.run();
+  // orbiters
   if(!this.gamePaused){
     for(let i = 0; i < this.movers.length; i++){
       this.movers[i].run();    // run each bubble
    }
+  }
+
+  // particle system
+  this.ps.run();
+
+  //run vehicles
+  for(let i = 0; i < this.vehicles.length; i++){
+    this.vehicles[i].run(this.vehicles);
   }
 }
 

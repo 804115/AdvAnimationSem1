@@ -4,8 +4,8 @@ function Vehicle(x, y){
   let dy = Math.random()*4-2;
   this.vel = new JSVector(dx, dy);
   this.acc = new JSVector(0, 0);
-  this.maxSpeed = game.slider2.value;
-  this.maxForce = game.slider1.value;
+  this.maxSpeed = 2;
+  this.maxForce = 10;
   this.scl = 10;
   this.clr = "rgba(150, 255, 235)";
 }
@@ -36,10 +36,10 @@ Vehicle.prototype.render = function(){
 }
 
 Vehicle.prototype.update = function(){
-  this.acc.limit(game.slider1.value);
+  this.acc.limit(this.maxForce);
   this.vel.add(this.acc);
   this.acc.multiply(0);
-  this.vel.limit(game.slider2.value);
+  this.vel.limit(this.maxSpeed);
   this.loc.add(this.vel);
 }
 
@@ -68,8 +68,8 @@ Vehicle.prototype.flock = function(vehicles){
   var align = this.align(vehicles);
   //var cohesion = this.cohesion(vehicles);
 
-  var sepMult = game.slider3.value;
-  var aliMult = game.slider4.value;
+  var sepMult = 0.05;
+  var aliMult = 0.05;
   //var cohMult = game.slider5.value;
   sep.multiply(sepMult);
   align.multiply(aliMult);
@@ -112,9 +112,9 @@ Vehicle.prototype.align = function(vehicles){
   if(count > 0){
     sum.divide(count);
     sum.normalize();
-    sum.multiply(game.slider2.value);
+    sum.multiply(this.maxSpeed);
     let steer = new JSVector.subGetNew(sum, this.vel);
-    steer.limit(game.slider1.value);
+    steer.limit(this.maxForce);
     return steer;
   } else {
     return new JSVector(0, 0);
@@ -122,7 +122,7 @@ Vehicle.prototype.align = function(vehicles){
 
 }
 
-/*Vehicle.prototype.cohesion = function(vehicles){
+Vehicle.prototype.cohesion = function(vehicles){
   var neighborDist = 50;
   var sum = new JSVector(0, 0);
   let count = 0;
@@ -140,4 +140,4 @@ Vehicle.prototype.align = function(vehicles){
   } else{
     return new JSVector(0, 0);
   }
-}*/
+}
