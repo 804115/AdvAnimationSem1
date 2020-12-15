@@ -5,7 +5,7 @@ function Vehicle(x, y){
   this.vel = new JSVector(dx, dy);
   this.acc = new JSVector(0, 0);
   this.maxSpeed = 2;
-  this.maxForce = 10;
+  this.maxForce = 2;
   this.scl = 10;
   this.clr = "rgba(150, 255, 235)";
 }

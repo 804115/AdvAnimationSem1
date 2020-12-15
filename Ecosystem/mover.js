@@ -6,6 +6,8 @@ function Mover(x, y, dx, dy, radius, clr, numOrbs){
   this.orbitAngle = Math.random() * Math.PI;
   this.clr = clr;
   this.orbiters = [];
+  this.lifeSpan = 1000;
+  this.isDead = false;
 
   //create all orbiters
   for(let i =0; i<numOrbs; i++){
@@ -48,6 +50,16 @@ Mover.prototype.update = function(){
     this.velocity.add(this.acc);
     this.velocity.limit(3);
     this.location.add(this.velocity);
+  }
+  this.lifeSpan--;
+  if(this.lifeSpan === 0){
+    this.isDead = true;
+  }
+  for(let i = 0; i < game.movers.length; i++){
+    let d = this.location.distance(game.movers[i].location);
+    if(d > 0 && d < 2.45){
+      game.createMover(game.canvas);
+    }
   }
 }
 

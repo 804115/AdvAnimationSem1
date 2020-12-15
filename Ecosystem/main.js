@@ -3,9 +3,10 @@ var game; // a single global object
 window.onload = init;//  After the window has been loaded, go to init
 
 function init(){
-    let movers = loadMovers(20);
+    let movers = loadMovers(30);
     let vehicle = new Vehicle();
-    game = new Game(movers);  // global game
+    let boid = new Boid();
+    game = new Game(movers);// global game
     animate();          // kick off the animation
 }
 
