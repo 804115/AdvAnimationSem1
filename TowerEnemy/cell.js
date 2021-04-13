@@ -25,7 +25,7 @@ class Cell {
         let ctx = game.ctx;
 
         if(this.isPath) {
-            ctx.fillStyle = "burlywood";
+            ctx.fillStyle = "white";
             ctx.fillRect(this.loc.x, this.loc.y,this.width, this.height);
         }
         //render cell

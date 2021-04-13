@@ -34,9 +34,11 @@ class Actor {
       }
 
       if(this.currentCell != this.lastCell){
-        this.vel = JSVector.subGetNew(this.target, this.loc);
+        this.acc = JSVector.subGetNew(this.target, this.loc);
+        this.acc.normalize();
         this.vel.multiply(0.5);
-        this.vel.limit(1);
+        this.vel.add(this.acc);
+        this.vel.limit(2);
         this.loc.add(this.vel);
       }
         // move this actor along the path until it reaches the end of
@@ -52,4 +54,5 @@ class Actor {
         ctx.fill();
         ctx.stroke();
     }
+
 }

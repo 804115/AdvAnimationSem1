@@ -1,14 +1,10 @@
 function Game(){
-
-    this.ga = new GameArea();   // create all the dom elements
-    // get the canvas as a property of the game
-    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas
+    this.ga = new GameArea();
     this.canvas = document.getElementById('canvas');
-    // get the context
-    // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
     this.ctx = this.canvas.getContext('2d'); // This is the context
 
-    this.ps = new ParticleSystem();
+    this.snakes = [];
+    this.createSnakes(this.canvas, 4);
 
     //  set number of cells in grid
     this.numCols = 20;
@@ -51,19 +47,41 @@ Game.prototype.run = function(){
             this.grid[r][c].run();
         }
     }
-
-    this.ps.run();
-
     // Show the end cell
-    this.ctx.fillStyle = "white";
+    this.ctx.fillStyle = "brown";
     this.ctx.font = '18px sans-serif';
     let endCell = this.path[this.path.length-1];
     this.ctx.fillText("End", endCell.loc.x + endCell.width/2 - 16,
                     endCell.loc.y + endCell.height/2 + 8);
+
+    for(let i = 0; i < this.snakes.length; i++){
+        this.snakes[i].run();
+    }
 
     // run all the actors
     for(let i = 0; i < this.actors.length; i++){
         this.actors[i].run();
     }
 
+  }
+
+
+Game.prototype.createSnakes = function(canvas, numMovers){
+  for(let i = 0; i < numMovers; i++){
+    var x, y, dx, dy, rad, clr, r, g, b;
+    //, numOrbs;
+    rad = 6;
+    x = Math.random()*this.canvas.width;
+    y = Math.random()*this.canvas.height;
+    dx = Math.random()*2-1;
+    dy = Math.random()*2-1;
+    //diam = 15;
+    r = Math.random()* 200*55;
+    g = Math.random()* 155;
+    b = Math.random()* 155;
+    clr = "rgba(" + r + ", " + g + "," + b + ")";
+    //numOrbs = Math.floor(Math.random()* 10) + 3;
+    this.snakes.push(new Snake(x, y, dx, dy, rad, clr, 6));
+  }
+  return this.snakes;
 }

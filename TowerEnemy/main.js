@@ -11,7 +11,6 @@ function init(){
 
 //  animation loop called 60 fps
 function animate(){
-  game.ps.addParticle();
   game.run();    // run the game
   requestAnimationFrame(animate);
 }
